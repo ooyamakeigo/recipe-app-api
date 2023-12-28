@@ -356,11 +356,15 @@ class PrivateRecpeApiTests(TestCase):
 
     def test_update_recipe_assign_ingredient(self):
         """Test assigning an existing ingredient when updating a recipe."""
-        ingredient_chicken = Ingredient.objects.create(user=self.user, name="Chicken")
+        ingredient_chicken = Ingredient.objects.create(
+            user=self.user, name="Chicken"
+        )
         recipe = create_recipe(user=self.user)
         recipe.ingredients.add(ingredient_chicken)
 
-        ingredient_tikka = Ingredient.objects.create(user=self.user, name="Tikka")
+        ingredient_tikka = Ingredient.objects.create(
+            user=self.user, name="Tikka"
+        )
         payload = {"ingredients": [{"name": "Tikka"}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format="json")
